@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto - HincTech</title>
+ <link rel="icon" type="image/png" href="favicon-32x32.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-100">
+
+<!-- Header con Navbar en botones -->
+<header class="bg-blue-700 text-white p-4 flex justify-between items-center shadow-md">
+  <div class="flex items-center space-x-3">
+    <img src="logo.png.jpeg" alt="Logo HincTech" class="h-10 w-10 rounded-full">
+    <div>
+      <h1 class="text-2xl font-bold">HincTech</h1>
+      <p class="text-sm">Reparamos tu mundo digital</p>
+    </div>
+  </div>
+      <button id="menu-btn" class="block md:hidden text-2xl focus:outline-none">☰</button>
+      <nav class="hidden md:flex space-x-6">
+        <a href="index.html" class="hover:underline">Inicio</a>
+        <a href="productos.html" class="hover:underline">Presupuesto</a>
+        <a href="contacto.html" class="hover:underline">Contacto</a>
+      </nav>
+    </div>
+    <div id="menu" class="hidden md:hidden bg-blue-800 mt-2 p-4 rounded-lg">
+      <a href="index.html" class="block py-2 hover:underline">Inicio</a>
+      <a href="productos.html" class="block py-2 hover:underline">Presupuesto</a>
+      <a href="contacto.html" class="block py-2 hover:underline">Contacto</a>
+    </div>
+  </header>
+
+  <main class="container mx-auto text-center my-20">
+    <h2 class="text-3xl font-bold text-gray-800 mb-6">¡Hablemos por WhatsApp!</h2>
+    <p class="text-lg text-gray-600 mb-10">Haz clic en el botón y contáctanos directamente.</p>
+    <a href="https://wa.me/5493751445528" target="_blank"
+   class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg shadow-lg transition">
+  📲 Contacto
+</a>
+
+<script>
+  const themeToggle = document.getElementById("theme-toggle");
+  const html = document.documentElement;
+
+  // Cargar tema guardado
+  if (localStorage.getItem("theme") === "dark") {
+    html.classList.add("dark");
+    themeToggle.textContent = "☀️";
+  }
+
+  themeToggle.addEventListener("click", () => {
+    if (html.classList.contains("dark")) {
+      html.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+      themeToggle.textContent = "🌙";
+    } else {
+      html.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+      themeToggle.textContent = "☀️";
+    }
+  });
+</script>
+
+
+    </a>
+    <div class="text-center mt-10">
+      <a href="index.html" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full shadow-md transition">
+        ⬅️ Volver al Inicio
+      </a>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

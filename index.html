@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es" class="">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HincTech - Servicio Técnico</title>
+  <link rel="icon" type="image/png" href="favicon-32x32.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* ✨ Animación de logo flotante */
+    .logo {
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* Fondo interestelar */
+    canvas#stars {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      background: black;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-100">
+
+  <!-- 🔹 NAVBAR -->
+  <header class="fixed inset-x-0 top-0 z-40">
+    <div class="bg-blue-700 text-white p-4 flex justify-between items-center shadow-md container mx-auto rounded-b-lg">
+      <!-- Logo + título -->
+      <div class="flex items-center space-x-3">
+        <img src="logo.png.jpeg" alt="HincTech Logo" class="w-10 h-10 rounded-full object-cover">
+        <div>
+          <h1 class="text-2xl font-bold leading-none">HincTech</h1>
+          <p class="text-xs opacity-90">Reparamos tu mundo digital</p>
+        </div>
+      </div>
+
+      <!-- Menú escritorio -->
+      <nav id="menu" class="hidden sm:flex items-center space-x-3">
+        <a href="index.html" class="bg-white text-blue-700 px-4 py-2 rounded-lg shadow hover:bg-gray-100 transition">🏠 Inicio</a>
+        <a href="productos.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition">📂 Presupuesto</a>
+        <a href="blog.html" class="bg-green-600 text-white px-4 py-2 rounded-lg shadow hover:bg-green-700 transition">📘 Tips</a>
+        <a href="galeria.html" class="bg-purple-600 text-white px-4 py-2 rounded-lg shadow hover:bg-purple-700 transition">📷 Galería</a>
+        <a href="contacto.html" class="bg-pink-600 text-white px-4 py-2 rounded-lg shadow hover:bg-pink-700 transition">📲 Contacto</a>
+      </nav>
+
+      <!-- Botones de tema y menú -->
+      <div class="flex items-center space-x-3">
+        <button id="theme-toggle" class="hidden sm:inline-block ml-2 p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-sm">
+          🌙
+        </button>
+
+        <button id="menu-btn" class="sm:hidden text-2xl p-2 rounded-md focus:outline-none" aria-label="Abrir menú">
+          ☰
+        </button>
+      </div>
+    </div>
+
+    <!-- Menú móvil -->
+    <div id="mobile-menu" class="sm:hidden hidden bg-blue-700 text-white mt-2 p-4 shadow-md container mx-auto rounded-b-lg">
+      <a href="index.html" class="block py-2 px-3 rounded hover:bg-blue-600">🏠 Inicio</a>
+      <a href="productos.html" class="block py-2 px-3 rounded hover:bg-blue-600">📂 Presupuesto</a>
+      <a href="blog.html" class="block py-2 px-3 rounded hover:bg-blue-600">📘 Tips</a>
+      <a href="galeria.html" class="block py-2 px-3 rounded hover:bg-blue-600">📷 Galería</a>
+      <a href="contacto.html" class="block py-2 px-3 rounded hover:bg-blue-600">📲 Contacto</a>
+
+      <div class="mt-3">
+        <button id="theme-toggle-mobile" class="w-full bg-gray-200 dark:bg-gray-700 text-black dark:text-white py-2 rounded">
+          🌙 Cambiar tema
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 🔭 HERO CON FONDO INTERESTELAR -->
+  <main class="pt-28">
+    <section class="relative h-[90vh] flex flex-col justify-center items-center text-center overflow-hidden">
+      <canvas id="stars"></canvas>
+      <div class="absolute inset-0 bg-black bg-opacity-60 z-10"></div>
+
+      <div class="relative z-20">
+        <img src="logo.png.jpeg" alt="HincTech Logo" class="w-32 h-32 mx-auto mb-6 rounded-full shadow-lg logo">
+        <h1 class="text-4xl md:text-5xl font-bold text-white drop-shadow-lg mb-4">HincTech</h1>
+        <p class="text-lg text-gray-200 mb-8">Reparamos tu mundo digital 🌌</p>
+
+        <div class="space-x-4">
+          <a href="productos.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg shadow-lg transition">📂 Presupuesto</a>
+          <a href="contacto.html" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg shadow-lg transition">📲 Contacto</a>
+          <a href="blog.html" class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg shadow-lg transition">📘 Tips y Curiosidades</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOBRE NOSOTROS -->
+    <section class="container mx-auto p-6">
+      <h2 class="text-2xl font-semibold mb-4">Sobre nosotros</h2>
+      <div class="bg-white p-6 rounded-xl shadow-md dark:bg-gray-800">
+        <p class="text-gray-700 dark:text-gray-200 mb-3">
+          En <strong>HincTech</strong> reparamos tu mundo digital con soluciones confiables. 
+          Con más de 4 años de experiencia en reparación y mantenimiento de equipos informáticos, 
+          nos destacamos por ofrecer atención personalizada, precios transparentes y compromiso total. 
+          Confía en nosotros para que tus dispositivos vuelvan a funcionar como nuevos.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-800 text-gray-300 text-center py-6 mt-10">
+    <div class="container mx-auto">
+      <p>© 2025 HincTech - Todos los derechos reservados</p>
+    </div>
+  </footer>
+
+  <!-- 🌙 SCRIPT FUNCIONAL -->
+  <script>
+    // --- Fondo interestelar ---
+    const canvas = document.getElementById("stars");
+    const ctx = canvas.getContext("2d");
+    let stars = [];
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resize);
+    resize();
+
+    for (let i = 0; i < 150; i++) {
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 1.8,
+        d: Math.random() * 1
+      });
+    }
+
+    function drawStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "white";
+      ctx.beginPath();
+      stars.forEach(star => {
+        ctx.moveTo(star.x, star.y);
+        ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2, true);
+      });
+      ctx.fill();
+      moveStars();
+    }
+
+    let angle = 0;
+    function moveStars() {
+      angle += 0.01;
+      stars.forEach(star => {
+        star.y += Math.cos(angle + star.d) + 0.4;
+        star.x += Math.sin(angle) * 0.3;
+
+        if (star.x > canvas.width + 5 || star.x < -5 || star.y > canvas.height) {
+          star.x = Math.random() * canvas.width;
+          star.y = -10;
+        }
+      });
+    }
+
+    function animate() {
+      drawStars();
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    // --- Menú móvil ---
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+    // --- Tema oscuro ---
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+
+    function setThemeIcon(btn) {
+      if (!btn) return;
+      btn.textContent = document.documentElement.classList.contains('dark') ? '☀️' : '🌙';
+    }
+
+    if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
+    setThemeIcon(themeToggle);
+    setThemeIcon(themeToggleMobile);
+
+    function toggleTheme() {
+      document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+      setThemeIcon(themeToggle);
+      setThemeIcon(themeToggleMobile);
+    }
+
+    themeToggle?.addEventListener('click', toggleTheme);
+    themeToggleMobile?.addEventListener('click', toggleTheme);
+  </script>
+</body>
+</html>

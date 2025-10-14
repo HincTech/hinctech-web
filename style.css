@@ -1,0 +1,194 @@
+/* style.css - estilos personalizados para HincTech */
+
+/* ===== Variables ===== */
+:root{
+  --hinctech-blue: #009FB7;
+  --hinctech-blue-dark: #007A8D;
+  --hinctech-gray: #6B7280;
+  --card-radius: 1rem;
+  --shadow-soft: 0 10px 25px rgba(10,10,10,0.08);
+}
+
+/* ===== Base ===== */
+html,body{
+  height:100%;
+}
+
+body{
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  background-color: #f3f4f6; /* fallback si Tailwind no carga */
+  color: #111827;
+}
+
+/* ===== Botones "corporativos" ===== */
+.hinctech-btn,
+.btn-hinctech {
+  display: inline-block;
+  background: var(--hinctech-blue);
+  color: #fff;
+  padding: 0.6rem 1.1rem;
+  border-radius: 0.75rem;
+  text-decoration: none;
+  font-weight: 600;
+  min-height: 44px; /* mejor para táctil */
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  transition: transform .14s ease, background .12s ease, box-shadow .12s ease;
+}
+.hinctech-btn:hover,
+.btn-hinctech:hover {
+  background: var(--hinctech-blue-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+}
+.hinctech-btn:focus,
+.btn-hinctech:focus {
+  outline: 3px solid rgba(0,159,183,0.18);
+  outline-offset: 2px;
+}
+
+/* ===== Header / logo ===== */
+header img {
+  object-fit: cover;
+  display: inline-block;
+}
+.header-logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 9999px; /* circular */
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+/* ===== Tarjetas de productos/servicios ===== */
+.product-card{
+  border-radius: var(--card-radius);
+  transition: transform .22s cubic-bezier(.2,.9,.3,1), box-shadow .22s ease;
+  overflow: hidden;
+  will-change: transform;
+}
+.product-card:hover{
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-soft);
+}
+.product-card img{
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+/* Ajuste para pantallas pequeñas */
+@media (max-width: 640px){
+  .product-card img{
+    height: 140px;
+  }
+}
+
+/* ===== Carrito ===== */
+#cart {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#cart li{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding: 0.5rem 0.6rem;
+  border-radius: 0.6rem;
+  background: #f8fafc;
+  margin-bottom: 0.45rem;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+}
+.cart-item-name {
+  font-weight:600;
+  color: #111827;
+}
+.cart-item-sub {
+  font-size: 0.95rem;
+  color: var(--hinctech-gray);
+}
+
+/* botones de cantidad y quitar */
+.qty-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:32px;
+  height:32px;
+  border-radius:6px;
+  background:#eef2f7;
+  border: none;
+  cursor:pointer;
+  font-size: 14px;
+}
+.qty-btn:hover{ background:#e2e8f0; }
+
+/* ===== Mensajes y estados ===== */
+#no-products-msg,
+#no-products {
+  color: var(--hinctech-gray);
+  font-weight:700;
+  letter-spacing: .02em;
+}
+
+/* ===== Footer ===== */
+footer{
+  background: var(--hinctech-blue);
+  color: white;
+  padding: 1rem;
+}
+
+/* ===== Menu hamburguesa (pequeños ajustes) ===== */
+#menu-btn{
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+#menu{
+  transition: all .16s ease;
+}
+
+/* ===== Accesibilidad y enlaces ===== */
+a{
+  text-decoration: none;
+}
+a:focus{
+  outline: 3px solid rgba(0,159,183,0.16);
+  outline-offset: 2px;
+}
+
+/* ===== Pequeñas utilidades ===== */
+.centered {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.shadow-strong {
+  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+}
+
+/* ===== Ajuste para imágenes del logo favicon si llegás a usarlo inline ===== */
+.favicon-img{
+  width:28px;
+  height:28px;
+  border-radius:9999px;
+  object-fit:cover;
+}
+
+/* Cambiar color del texto dentro del formulario */
+input, textarea {
+  color: black; /* El texto que escriba el usuario será negro */
+}
+
+/* Cambiar color de los placeholders */
+input::placeholder,
+textarea::placeholder {
+  color: #000; /* Negro */
+  opacity: 0.8; /* Un poco más tenue */
+}
+

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <link rel="icon" type="image/png" href="favicon-32x32.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Fuerza el color del texto escrito en inputs y textarea */
+    input, textarea {
+      color: #000 !important; /* Negro */
+    }
+
+    /* Fuerza el color de los placeholders */
+    input::placeholder,
+    textarea::placeholder {
+      color: #000 !important; /* Negro */
+      opacity: 0.7; /* Un poquito más tenue que el texto normal */
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+<!-- Header con Navbar en botones -->
+<header class="bg-blue-700 text-white p-4 flex justify-between items-center shadow-md">
+  <div class="flex items-center space-x-3">
+    <img src="logo.png.jpeg" alt="Logo HincTech" class="h-10 w-10 rounded-full">
+    <div>
+      <h1 class="text-2xl font-bold">HincTech</h1>
+      <p class="text-sm">Reparamos tu mundo digital</p>
+    </div>
+  </div>
+      <button id="menu-btn" class="block md:hidden text-2xl focus:outline-none">☰</button>
+      <nav class="hidden md:flex space-x-6">
+        <a href="index.html" class="hover:underline">Inicio</a>
+        <a href="productos.html" class="hover:underline">Presupuesto</a>
+        <a href="contacto.html" class="hover:underline">Contacto</a>
+      </nav>
+    </div>
+    <div id="menu" class="hidden md:hidden bg-blue-800 mt-2 p-4 rounded-lg">
+      <a href="index.html" class="block py-2 hover:underline">Inicio</a>
+      <a href="productos.html" class="block py-2 hover:underline">Presupuesto</a>
+      <a href="contacto.html" class="block py-2 hover:underline">Contacto</a>
+    </div>
+  </header>
+
+  <main class="container mx-auto p-6">
+    <h2 class="text-2xl font-semibold mb-4">SOLICITA TU PRESUPUESTO (CELULARES)</h2>
+    <div id="presupuesto" class="grid gap-6 md:grid-cols-3 sm:grid-cols-2">
+    </div>
+    <div class="text-center mt-10">
+      <a href="index.html" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full shadow-md transition">
+        ⬅️ Volver al Inicio
+      </a>
+    </div>
+  </main>
+
+  <!-- Formulario de presupuesto para celulares -->
+<section class="container mx-auto p-6">
+  <h2 class="text-2xl font-semibold mb-4"></h2>
+  <div class="bg-white p-6 rounded-xl shadow-md">
+    <form id="celular-form" class="space-y-4">
+      <div>
+        <label class="block font-medium mb-1">Tu Nombre</label>
+        <input type="text" id="nombre" required
+         class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500">
+      </div>
+
+      <div>
+        <label class="block font-medium mb-1">Marca del dispositivo</label>
+        <input type="text" id="marca" required
+          class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500">
+      </div>
+
+      <div>
+        <label class="block font-medium mb-1">Modelo</label>
+        <input type="text" id="modelo" required
+          class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500">
+      </div>
+
+      <div>
+        <label class="block font-medium mb-1">Problema del dispositivo</label>
+        <textarea id="problema" rows="3" required
+          class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500"></textarea>
+      </div>
+
+      <button type="submit"
+        class="w-full bg-green-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-700 transition">
+        📲 Enviar a WhatsApp
+      </button>
+    </form>
+  </div>
+</section>
+
+<script>
+  document.getElementById("celular-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const nombre = document.getElementById("nombre").value;
+    const marca = document.getElementById("marca").value;
+    const modelo = document.getElementById("modelo").value;
+    const problema = document.getElementById("problema").value;
+
+    // Número de WhatsApp (cambiá con tu número, con código de país, sin + ni 0)
+    const telefono = "5493751445528";
+
+    const mensaje = `Hola, soy ${nombre}.%0AQuiero solicitar un presupuesto para mi celular.%0A📱 Marca: ${marca}%0A📱 Modelo: ${modelo}%0A⚠️ Problema: ${problema}`;
+
+    const url = `https://wa.me/${telefono}?text=${mensaje}`;
+    window.open(url, "_blank");
+  });
+</script>
+
+<script>
+  const themeToggle = document.getElementById("theme-toggle");
+  const html = document.documentElement;
+
+  // Cargar tema guardado
+  if (localStorage.getItem("theme") === "dark") {
+    html.classList.add("dark");
+    themeToggle.textContent = "☀️";
+  }
+
+  themeToggle.addEventListener("click", () => {
+    if (html.classList.contains("dark")) {
+      html.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+      themeToggle.textContent = "🌙";
+    } else {
+      html.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+      themeToggle.textContent = "☀️";
+    }
+  });
+</script>
+
+
+  <script src="script.js"></script>
+</body>
+</html>
