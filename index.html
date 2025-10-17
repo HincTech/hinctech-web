@@ -202,22 +202,20 @@
 <div id="chatbot-container">
   <div id="chatbot-toggle">🤖</div>
   <div id="chatbot">
-    <div class="chat-header">Preguntas Frecuentes
-      Elegí una pregunta para ver la respuesta 👇
-    </div>
+    <div class="chat-header">Preguntas Frecuentes</div>
     <div class="chat-body" id="chat-body">
       <div class="options">
         <button class="option" onclick="answer('local', this)">¿Dónde queda su local?</button>
         <button class="option" onclick="answer('contacto', this)">¿Cómo puedo contactarlos?</button>
-         <button class="option" onclick="answer('tiempo', this)">¿Cuál es el tiempo estimado para retirar un dispositivo reparado?</button>
-          <button class="option" onclick="answer('pago', this)">¿Qué metodo de pago aceptan?</button>
+        <button class="option" onclick="answer('tiempo', this)">¿Cuál es el tiempo estimado para retirar un dispositivo reparado?</button>
+        <button class="option" onclick="answer('pago', this)">¿Qué método de pago aceptan?</button>
       </div>
     </div>
   </div>
 </div>
 
 <style>
-/* Contenedor flotante */
+/* Contenedor flotante en esquina inferior derecha */
 #chatbot-container {
   position: fixed;
   bottom: 20px;
@@ -242,22 +240,24 @@
 }
 #chatbot-toggle:hover { transform: scale(1.1); }
 
-/* Chatbot */
+/* Chatbot panel */
 #chatbot {
   width: 320px;
   max-height: 400px;
-  background: #ffffff; /* Fondo blanco para contraste */
+  background: #ffffff;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.3);
   overflow: hidden;
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
-  transform: scale(0);
+  transform: translateY(20px) scale(0);
   transform-origin: bottom right;
   transition: transform 0.3s ease-in-out;
 }
-#chatbot.open { transform: scale(1); }
+#chatbot.open {
+  transform: translateY(-10px) scale(1); /* Se mueve hacia arriba al abrir */
+}
 
 /* Header */
 .chat-header {
@@ -272,7 +272,7 @@
 .chat-body {
   padding: 10px;
   overflow-y: auto;
-  background: #f9f9f9; /* Fondo suave para el contenido */
+  background: #f9f9f9;
   flex-grow: 1;
 }
 
@@ -281,17 +281,10 @@
   margin: 8px 0;
   padding: 8px;
   border-radius: 8px;
-  word-break: break-word; /* evita que el texto se corte */
+  word-break: break-word;
 }
-.bot-message {
-  background: #e2e8f0; /* Gris claro para visibilidad */
-  color: #000;
-}
-.user-message {
-  background: #007bff;
-  color: #fff;
-  text-align: right;
-}
+.bot-message { background: #e2e8f0; color: #000; }
+.user-message { background: #007bff; color: #fff; text-align: right; }
 
 /* Botones de opciones */
 .option {
@@ -306,9 +299,7 @@
   cursor: pointer;
   transition: 0.2s;
 }
-.option:hover {
-  background: #d0e5ff;
-}
+.option:hover { background: #d0e5ff; }
 
 /* Scroll */
 .chat-body::-webkit-scrollbar { width: 6px; }
@@ -327,10 +318,10 @@ function answer(type, button) {
   const chatBody = document.getElementById('chat-body');
   let response = '';
 
-  if (type === 'local') response = 'Actualmente no contamos con local, pero nos podes ubicar en la terminal en el local de LEO';
-  else if (type === 'pago') response = 'Aceptamos transferencias por mercado pago y efectivo';
-  else if (type === 'contacto') response = 'Podés escribirnos por Whatsapp en el apartado de contacto tenes el enlace directo a nuestro chat';
-   else if (type === 'tiempo') response = 'El tiempo estimado es de 15 dias, si el cliente no retira su dispositivo en ese lapso de tiempo no tendra garantia'
+  if (type === 'local') response = 'Actualmente no contamos con local, pero nos podés ubicar en la terminal en el local de LEO.';
+  else if (type === 'pago') response = 'Aceptamos transferencias por MercadoPago y efectivo.';
+  else if (type === 'contacto') response = 'Podés escribirnos por WhatsApp en el apartado de contacto, ahí tenés el enlace directo a nuestro chat.';
+  else if (type === 'tiempo') response = 'El tiempo estimado es de 15 días. Si el cliente no retira su dispositivo en ese lapso, no tendrá garantía.';
 
   // Mostrar pregunta y respuesta
   chatBody.innerHTML += `<div class="user-message">${button.innerText}</div>`;
@@ -341,4 +332,4 @@ function answer(type, button) {
 }
 </script>
 </body>
-</html>
+ </html>
