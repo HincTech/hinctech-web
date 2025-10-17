@@ -215,13 +215,16 @@
 </div>
 
 <style>
-/* Contenedor flotante en esquina inferior derecha */
+/* Contenedor flotante */
 #chatbot-container {
   position: fixed;
   bottom: 20px;
   right: 20px;
   z-index: 99999;
   font-family: sans-serif;
+  display: flex;
+  flex-direction: column-reverse; /* botón abajo, chat arriba */
+  align-items: flex-end;
 }
 
 /* Botón burbuja */
@@ -237,6 +240,7 @@
   cursor: pointer;
   box-shadow: 0 4px 15px rgba(0,0,0,0.3);
   transition: transform 0.3s;
+  margin-top: 10px;
 }
 #chatbot-toggle:hover { transform: scale(1.1); }
 
@@ -250,13 +254,13 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  margin-bottom: 10px;
-  transform: translateY(20px) scale(0);
+  transform: scaleY(0);
   transform-origin: bottom right;
   transition: transform 0.3s ease-in-out;
+  margin-bottom: 10px;
 }
 #chatbot.open {
-  transform: translateY(-10px) scale(1);
+  transform: scaleY(1);
 }
 
 /* Header */
