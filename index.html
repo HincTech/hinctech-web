@@ -198,7 +198,7 @@
     themeToggleMobile?.addEventListener('click', toggleTheme);
   </script>
 
-<!-- Chatbot flotante actualizado -->
+<!-- Chatbot flotante en esquina inferior derecha -->
 <div id="chatbot-container">
   <div id="chatbot-toggle">🤖</div>
   <div id="chatbot">
@@ -220,7 +220,7 @@
   position: fixed;
   bottom: 20px;
   right: 20px;
-  z-index: 99999; /* SUPERIOR a todo */
+  z-index: 99999;
   font-family: sans-serif;
 }
 
@@ -240,7 +240,7 @@
 }
 #chatbot-toggle:hover { transform: scale(1.1); }
 
-/* Chatbot panel */
+/* Panel del chatbot */
 #chatbot {
   width: 320px;
   max-height: 400px;
@@ -256,7 +256,7 @@
   transition: transform 0.3s ease-in-out;
 }
 #chatbot.open {
-  transform: translateY(-10px) scale(1); /* Se mueve hacia arriba al abrir */
+  transform: translateY(-10px) scale(1);
 }
 
 /* Header */
