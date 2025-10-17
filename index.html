@@ -49,7 +49,7 @@
       <nav id="menu" class="hidden sm:flex items-center space-x-3">
         <a href="index.html" class="bg-white text-blue-700 px-4 py-2 rounded-lg shadow hover:bg-gray-100 transition">🏠 Inicio</a>
         <a href="productos.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition">📂 Presupuesto</a>
-        <a href="blog.html" class="bg-green-600 text-white px-4 py-2 rounded-lg shadow hover:bg-green-700 transition">📘 Tips</a>
+        <a href="blog.html" class="bg-green-600 text-white px-4 py-2 rounded-lg shadow hover:bg-green-700 transition">📘 Tips/curiosidades</a>
         <a href="galeria.html" class="bg-purple-600 text-white px-4 py-2 rounded-lg shadow hover:bg-purple-700 transition">📷 Galería</a>
         <a href="contacto.html" class="bg-pink-600 text-white px-4 py-2 rounded-lg shadow hover:bg-pink-700 transition">📲 Contacto</a>
       </nav>
@@ -70,7 +70,7 @@
     <div id="mobile-menu" class="sm:hidden hidden bg-blue-700 text-white mt-2 p-4 shadow-md container mx-auto rounded-b-lg">
       <a href="index.html" class="block py-2 px-3 rounded hover:bg-blue-600">🏠 Inicio</a>
       <a href="productos.html" class="block py-2 px-3 rounded hover:bg-blue-600">📂 Presupuesto</a>
-      <a href="blog.html" class="block py-2 px-3 rounded hover:bg-blue-600">📘 Tips</a>
+      <a href="blog.html" class="block py-2 px-3 rounded hover:bg-blue-600">📘 Tips/curiosidades</a>
       <a href="galeria.html" class="block py-2 px-3 rounded hover:bg-blue-600">📷 Galería</a>
       <a href="contacto.html" class="block py-2 px-3 rounded hover:bg-blue-600">📲 Contacto</a>
 
@@ -197,5 +197,148 @@
     themeToggle?.addEventListener('click', toggleTheme);
     themeToggleMobile?.addEventListener('click', toggleTheme);
   </script>
+
+<!-- Chatbot flotante actualizado -->
+<div id="chatbot-container">
+  <div id="chatbot-toggle">🤖</div>
+  <div id="chatbot">
+    <div class="chat-header">Preguntas Frecuentes
+      Elegí una pregunta para ver la respuesta 👇
+    </div>
+    <div class="chat-body" id="chat-body">
+      <div class="options">
+        <button class="option" onclick="answer('local', this)">¿Dónde queda su local?</button>
+        <button class="option" onclick="answer('contacto', this)">¿Cómo puedo contactarlos?</button>
+         <button class="option" onclick="answer('tiempo', this)">¿Cuál es el tiempo estimado para retirar un dispositivo reparado?</button>
+          <button class="option" onclick="answer('pago', this)">¿Qué metodo de pago aceptan?</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+/* Contenedor flotante */
+#chatbot-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 99999; /* SUPERIOR a todo */
+  font-family: sans-serif;
+}
+
+/* Botón burbuja */
+#chatbot-toggle {
+  background: #007bff;
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  transition: transform 0.3s;
+}
+#chatbot-toggle:hover { transform: scale(1.1); }
+
+/* Chatbot */
+#chatbot {
+  width: 320px;
+  max-height: 400px;
+  background: #ffffff; /* Fondo blanco para contraste */
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  transform: scale(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease-in-out;
+}
+#chatbot.open { transform: scale(1); }
+
+/* Header */
+.chat-header {
+  background: #007bff;
+  color: white;
+  padding: 10px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Body */
+.chat-body {
+  padding: 10px;
+  overflow-y: auto;
+  background: #f9f9f9; /* Fondo suave para el contenido */
+  flex-grow: 1;
+}
+
+/* Mensajes */
+.bot-message, .user-message {
+  margin: 8px 0;
+  padding: 8px;
+  border-radius: 8px;
+  word-break: break-word; /* evita que el texto se corte */
+}
+.bot-message {
+  background: #e2e8f0; /* Gris claro para visibilidad */
+  color: #000;
+}
+.user-message {
+  background: #007bff;
+  color: #fff;
+  text-align: right;
+}
+
+/* Botones de opciones */
+.option {
+  display: block;
+  width: 100%;
+  margin: 5px 0;
+  background: #e7f1ff;
+  color: #000;
+  border: none;
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.option:hover {
+  background: #d0e5ff;
+}
+
+/* Scroll */
+.chat-body::-webkit-scrollbar { width: 6px; }
+.chat-body::-webkit-scrollbar-thumb { background: #007bff; border-radius: 3px; }
+</style>
+
+<script>
+const chatbotToggle = document.getElementById('chatbot-toggle');
+const chatbot = document.getElementById('chatbot');
+
+chatbotToggle.addEventListener('click', () => {
+  chatbot.classList.toggle('open');
+});
+
+function answer(type, button) {
+  const chatBody = document.getElementById('chat-body');
+  let response = '';
+
+  if (type === 'local') response = 'Actualmente no contamos con local, pero nos podes ubicar en la terminal en el local de LEO';
+  else if (type === 'pago') response = 'Aceptamos transferencias por mercado pago y efectivo';
+  else if (type === 'contacto') response = 'Podés escribirnos por Whatsapp en el apartado de contacto tenes el enlace directo a nuestro chat';
+   else if (type === 'tiempo') response = 'El tiempo estimado es de 15 dias, si el cliente no retira su dispositivo en ese lapso de tiempo no tendra garantia'
+
+  // Mostrar pregunta y respuesta
+  chatBody.innerHTML += `<div class="user-message">${button.innerText}</div>`;
+  chatBody.innerHTML += `<div class="bot-message">${response}</div>`;
+
+  // Scroll automático
+  chatBody.scrollTop = chatBody.scrollHeight;
+}
+</script>
 </body>
 </html>
