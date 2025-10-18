@@ -59,8 +59,7 @@
       <!-- Servicios dinámicos solo para PC/Notebook -->
       <div id="servicios-container" class="hidden">
         <label class="block font-medium mb-1">Servicio</label>
-        <select id="servicio" class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500">
-        </select>
+        <select id="servicio" class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500"></select>
       </div>
 
       <div>
@@ -86,15 +85,24 @@
     </form>
 
     <div class="text-center mt-6">
-  <a href="index.html"
-     class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full shadow-md transition">
-    ⬅️ Volver al Inicio
-  </a>
-</div>
+      <a href="index.html"
+        class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full shadow-md transition">
+        ⬅️ Volver al Inicio
+      </a>
+    </div>
   </section>
 </main>
 
+<!-- 🔒 Script seguro -->
 <script>
+// 🧹 Función para limpiar el texto ingresado por el usuario (evita inyecciones XSS)
+function sanitizeInput(str) {
+  const temp = document.createElement("div");
+  temp.textContent = str;
+  return temp.innerHTML;
+}
+
+// Elementos del DOM
 const dispositivo = document.getElementById("dispositivo");
 const serviciosContainer = document.getElementById("servicios-container");
 const servicioSelect = document.getElementById("servicio");
@@ -108,8 +116,11 @@ const serviciosPC = [
   "Instalación de drivers y más"
 ];
 
+// Mostrar servicios dinámicamente
 dispositivo.addEventListener("change", () => {
-  if (dispositivo.value === "PC/Notebook") {
+  const tipo = dispositivo.value;
+
+  if (tipo === "PC/Notebook") {
     servicioSelect.innerHTML = "";
     serviciosPC.forEach(s => {
       const option = document.createElement("option");
@@ -124,33 +135,35 @@ dispositivo.addEventListener("change", () => {
   }
 });
 
-document.getElementById("presupuesto-form").addEventListener("submit", function(e){
+// 📲 Envío a WhatsApp con validación y sanitización
+document.getElementById("presupuesto-form").addEventListener("submit", function(e) {
   e.preventDefault();
 
-  const nombre = document.getElementById("nombre").value.trim();
-  const telefonoUser = document.getElementById("telefono").value.trim();
-  const tipoDispositivo = dispositivo.value;
-  const servicio = servicioSelect.value || "N/A"; // Por si no hay servicio seleccionado
-  const marca = document.getElementById("marca").value.trim();
-  const modelo = document.getElementById("modelo").value.trim();
-  const detalle = document.getElementById("detalle").value.trim();
+  const nombre = sanitizeInput(document.getElementById("nombre").value.trim());
+  const telefonoUser = sanitizeInput(document.getElementById("telefono").value.trim());
+  const tipoDispositivo = sanitizeInput(dispositivo.value);
+  const servicio = sanitizeInput(servicioSelect.value || "N/A");
+  const marca = sanitizeInput(document.getElementById("marca").value.trim());
+  const modelo = sanitizeInput(document.getElementById("modelo").value.trim());
+  const detalle = sanitizeInput(document.getElementById("detalle").value.trim());
 
-  const telefono = "5493751445528"; // tu WhatsApp
+  const telefono = "5493751445528"; // Tu número de WhatsApp
 
-  let mensaje = `Hola, soy ${nombre}.\nQuiero solicitar un presupuesto.\nTel: ${telefonoUser}\nDispositivo: ${tipoDispositivo}`;
-  if (tipoDispositivo === "PC/Notebook") {
-    mensaje += `\nServicio: ${servicio}`;
+  // Validaciones básicas
+  if (!nombre || !telefonoUser || !tipoDispositivo) {
+    alert("Por favor completá todos los campos obligatorios.");
+    return;
   }
+
+  // Construcción del mensaje
+  let mensaje = `Hola, soy ${nombre}.\nQuiero solicitar un presupuesto.\nTel: ${telefonoUser}\nDispositivo: ${tipoDispositivo}`;
+  if (tipoDispositivo === "PC/Notebook") mensaje += `\nServicio: ${servicio}`;
   mensaje += `\nMarca: ${marca}\nModelo: ${modelo}\nDetalle: ${detalle}`;
 
-  // Codificar mensaje
   const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
-
-  // Abrir WhatsApp en nueva pestaña
+  
   const win = window.open(url, "_blank");
-  if (!win) {
-    alert("Por favor permite abrir nuevas pestañas para enviar WhatsApp.");
-  }
+  if (!win) alert("Por favor permite abrir nuevas pestañas para enviar WhatsApp.");
 });
 </script>
 
